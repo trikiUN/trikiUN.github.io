@@ -1,0 +1,27 @@
+body {
+ margin:0;
+ padding:0;
+ background:#151515 url("../images/bkg.png") 0 0 !important;
+ font-size:20px;
+ line-height:1.5;
+ color: #fff !important;
+ font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+.trikiBtn {
+  width = 100px;
+  height = 100px;
+}
+
+.you{
+  text-align: right;
+}
+
+.agent{
+  text-align: left;
+}
+.aling-first-raw{
+  height: 25px;
+}
+.aling-second-raw{
+  height: 25px;
+}
