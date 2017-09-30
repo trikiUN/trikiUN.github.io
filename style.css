@@ -25,3 +25,7 @@ body {
 .aling-second-raw{
   height: 25px;
 }
+#start{
+    margin-top: 10%;
+    cursor: pointer;
+}

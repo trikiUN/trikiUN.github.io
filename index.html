@@ -9,8 +9,10 @@
   <body>
 
 
-<div class="container">
-  <div class="row">
+
+
+<div class="container"  >
+  <div class="row" id="score" style="display: none;">
     <div class="col-xs-6 you">
       You: 10
     </div>
@@ -21,7 +23,11 @@
 
   <div class="row">
     <div class="col-md-3"></div>
-    <div class="col-md-6 col-sm-12 col-xs-12">
+    <div class="col-md-6 col-sm-12 col-xs-12" id="start" onclick="start()">
+      <img src="img/start.png" class="img-responsive" alt="mounting" id="start">
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12" id="game" style="display: none;">
+
       <div class="row">
         <img src="img/triki.png" class="img-responsive" alt="mounting" style="position:absolute;">
 
@@ -47,7 +53,6 @@
       </div>
       <div class="aling-second-raw"></div>
       <div class="row">
-
         <div class="col-xs-4" onclick="clickedButton(41)" >
           <img src="img/none.png" class="img-responsive" alt="mounting" id="40">
           <img src="img/you.png" class="img-responsive" alt="mounting" id="41" style="display: none;">
@@ -58,6 +63,7 @@
           <img src="img/none.png" class="img-responsive" alt="mounting" id="50">
           <img src="img/you.png" class="img-responsive" alt="mounting" id="51" style="display: none;">
           <img src="img/agent.png" class="img-responsive" alt="mounting" id="52" style="display: none;">
+
         </div>
 
         <div class="col-xs-4" onclick="clickedButton(61)" >
