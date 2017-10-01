@@ -38,13 +38,14 @@ var clickedButton = function ( id ){
       return;
     }
     checkTie();
-    moveAgent("12");
+    nextMove();
   }
 
 }
 
 
 var moveAgent = function ( id ){
+
   if( matrix[parseInt(id/10)] == null ){
     document.getElementById(id).style.display = "initial";
     document.getElementById(id-2).style.display = "none";
@@ -62,12 +63,32 @@ var moveAgent = function ( id ){
   }
 }
 
+var nextMove = function(){
+  var winnerMove = checkWinnerMove();
+  if( winnerMove != null ){
+    moveAgent(winnerMove+"2");
+    return;
+  }
+  moveAgent("12");
+}
+
+var checkWinnerMove = function(){
+  var check = false;
+  for(var i=1; i<10;i++){
+    if( matrix[i] == null ){
+      matrix[i] = 1;
+      check = checkWinner();
+      matrix[i] = null;
+      if( check == true ) return i;
+    }
+  }
+  return null;
+}
+
 var checkTie = function(){
   var check = true;
   for(var i=1; i<10 && check; i++)
     check = check && matrix[i] != null;
-
-
   if( check == true ){
     alert("tie");
     newGame();
