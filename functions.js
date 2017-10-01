@@ -22,7 +22,6 @@ var newGame = function(){
     document.getElementById(i+"2").style.display = "none";
   }
   start();
-
 }
 
 
@@ -36,9 +35,10 @@ var clickedButton = function ( id ){
       document.getElementById("you").innerHTML = "You: "+you;
       alert("You win")
       newGame();
-
-
+      return;
     }
+    checkTie();
+    moveAgent("12");
   }
 
 }
@@ -53,10 +53,27 @@ var moveAgent = function ( id ){
       agent++;
       document.getElementById("agent").innerHTML = "Agent: "+agent;
       alert("You lost")
+      newGame();
+      return;
     }
+    checkTie();
+  }else{  // if the move has already been done
+    moveAgent((parseInt(Math.random()*10)%9+1)+"2");
   }
-
 }
+
+var checkTie = function(){
+  var check = true;
+  for(var i=1; i<10 && check; i++)
+    check = check && matrix[i] != null;
+
+
+  if( check == true ){
+    alert("tie");
+    newGame();
+  }
+}
+
 
 var checkWinner = function (){
   var temp = true;
