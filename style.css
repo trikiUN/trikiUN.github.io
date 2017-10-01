@@ -26,6 +26,9 @@ body {
   height: 25px;
 }
 #start{
-    margin-top: 10%;
+    margin-top: 2%;
+
+
+
     cursor: pointer;
 }
