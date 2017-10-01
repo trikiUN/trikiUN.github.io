@@ -11,14 +11,6 @@ body {
   width = 100px;
   height = 100px;
 }
-
-.you{
-  text-align: right;
-}
-
-.agent{
-  text-align: left;
-}
 .aling-first-raw{
   height: 25px;
 }
@@ -27,8 +19,11 @@ body {
 }
 #start{
     margin-top: 2%;
-
-
-
     cursor: pointer;
+}
+#you{
+  text-align: right;
+}
+#agent{
+  text-align: left;
 }

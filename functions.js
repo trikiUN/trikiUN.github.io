@@ -2,6 +2,8 @@ var matrix = [ null, null, null, null, null, null, null, null, null, null] // in
 
 var turnCounter = 0;
 var startPlayer = 0;
+var you = 0;
+var agent = 0;
 
 var start = function(){
   startPlayer = parseInt(Math.random()*10)%2; // choose player : 0=player , 1=agent
@@ -30,12 +32,17 @@ var clickedButton = function ( id ){
     document.getElementById(id-1).style.display = "none";
     matrix[parseInt(id/10)] = 0;
     if( checkWinner() == true ){
+      you++;
+      document.getElementById("you").innerHTML = "You: "+you;
       alert("You win")
       newGame();
+
+
     }
   }
 
 }
+
 
 var moveAgent = function ( id ){
   if( matrix[parseInt(id/10)] == null ){
@@ -43,6 +50,8 @@ var moveAgent = function ( id ){
     document.getElementById(id-2).style.display = "none";
     matrix[parseInt(id/10)] = 1;
     if( checkWinner() == true ){
+      agent++;
+      document.getElementById("agent").innerHTML = "Agent: "+agent;
       alert("You lost")
     }
   }
