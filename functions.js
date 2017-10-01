@@ -5,9 +5,9 @@ var startPlayer = 0;
 var you = 0;
 var agent = 0;
 
-var start = function(){
+var initiate = function(){
   startPlayer = parseInt(Math.random()*10)%2; // choose player : 0=player , 1=agent
-  document.getElementById("start").style.display = "none";
+  document.getElementById("begin").style.display = "none";
   document.getElementById("game").style.display = "initial";
   document.getElementById("score").style.display = "block";
   if( startPlayer == 1 )  // first move randomly by the agent
@@ -21,7 +21,7 @@ var newGame = function(){
     document.getElementById(i+"1").style.display = "none";
     document.getElementById(i+"2").style.display = "none";
   }
-  start();
+  initiate();
 }
 
 
