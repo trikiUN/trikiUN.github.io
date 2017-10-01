@@ -64,19 +64,22 @@ var moveAgent = function ( id ){
 }
 
 var nextMove = function(){
-  var winnerMove = checkWinnerMove();
-  if( winnerMove != null ){
-    moveAgent(winnerMove+"2");
-    return;
+  var winnerMove = null;
+  for(var i=1; i>=0; i--){  // 0:check if the player(you) can win -- 1:check if the agent can win
+    winnerMove = checkWinnerMove(i); // first have to check that the agent can win, after the player
+    if( winnerMove != null ){
+      moveAgent(winnerMove+"2");
+      return;
+    }
   }
   moveAgent("12");
 }
 
-var checkWinnerMove = function(){
+var checkWinnerMove = function(player){
   var check = false;
   for(var i=1; i<10;i++){
     if( matrix[i] == null ){
-      matrix[i] = 1;
+      matrix[i] = player;
       check = checkWinner();
       matrix[i] = null;
       if( check == true ) return i;
