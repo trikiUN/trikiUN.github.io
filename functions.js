@@ -11,7 +11,7 @@ var start = function(){
   document.getElementById("game").style.display = "initial";
   document.getElementById("score").style.display = "block";
   if( startPlayer == 1 )  // first move randomly by the agent
-     moveAgent((parseInt(Math.random()*10)%9+1)+"2");  // Math.random()*10)%9 = number 0-8  -   +1 = because index in the game are 1-9
+    nextMove();
 }
 
 var newGame = function(){
@@ -31,13 +31,14 @@ var clickedButton = function ( id ){
     document.getElementById(id-1).style.display = "none";
     matrix[parseInt(id/10)] = 0;
     if( checkWinner() == true ){
-      you++;
-      document.getElementById("you").innerHTML = "You: "+you;
-      alert("You win")
+      showWinner("You");
       newGame();
       return;
     }
-    checkTie();
+    if( checkTie() == true ){
+        newGame();
+        return;
+    }
     nextMove();
   }
 
@@ -51,26 +52,32 @@ var moveAgent = function ( id ){
     document.getElementById(id-2).style.display = "none";
     matrix[parseInt(id/10)] = 1;
     if( checkWinner() == true ){
-      agent++;
-      document.getElementById("agent").innerHTML = "Agent: "+agent;
-      alert("You lost")
+      showWinner("Agent");
       newGame();
       return;
     }
-    checkTie();
-  }else{  // if the move has already been done
+    if( checkTie() == true ){
+        newGame();
+        return;
+    }
+  }else // if the move has already been done
     moveAgent((parseInt(Math.random()*10)%9+1)+"2");
-  }
+
 }
 
 var nextMove = function(){
-  var winnerMove = null;
+  var temp = null;
   for(var i=1; i>=0; i--){  // 0:check if the player(you) can win -- 1:check if the agent can win
-    winnerMove = checkWinnerMove(i); // first have to check that the agent can win, after the player
-    if( winnerMove != null ){
-      moveAgent(winnerMove+"2");
+    temp = checkWinnerMove(i); // first have to check that the agent can win, after the player
+    if( temp != null ){
+      moveAgent(temp+"2");
       return;
     }
+  }
+  temp = moveInCorners();
+  if(temp != null){
+    moveAgent(temp+"2");
+    return;
   }
   moveAgent("12");
 }
@@ -88,14 +95,26 @@ var checkWinnerMove = function(player){
   return null;
 }
 
+var moveInCorners = function(){
+  var arr = new Array();
+  for(var i=1; i<10; i+=2) // loop odd numbers (corners and center)
+    if( matrix[i] == null ) arr.push(i);
+  if( arr.length > 0 ){
+    var temp = parseInt(Math.random()*10)%arr.length; // select a random index in the array
+    return arr[temp];
+  }
+  return null;
+}
+
 var checkTie = function(){
   var check = true;
   for(var i=1; i<10 && check; i++)
     check = check && matrix[i] != null;
   if( check == true ){
     alert("tie");
-    newGame();
+    return true;
   }
+  return false;
 }
 
 
@@ -130,6 +149,22 @@ var checkWinner = function (){
   if( temp == true )
     return true;
   return false;
+}
+
+var showWinner = function(player){
+  var temp = 0;
+  if( player == "Agent" ){
+    agent++;
+    temp = agent;
+    alert("You lost")
+  }else{
+    you++;
+    temp = you;
+    alert("You Win")
+  }
+  document.getElementById(player).innerHTML = player+": "+temp;
+  return;
+
 }
 
 
