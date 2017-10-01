@@ -100,6 +100,8 @@ var moveInCorners = function(){
   for(var i=1; i<10; i+=2) // loop odd numbers (corners and center)
     if( matrix[i] == null ) arr.push(i);
   if( arr.length > 0 ){
+    var a = arr.indexOf(5);
+    if( a > -1 ) return arr[a];
     var temp = parseInt(Math.random()*10)%arr.length; // select a random index in the array
     return arr[temp];
   }
