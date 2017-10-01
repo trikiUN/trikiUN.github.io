@@ -8,8 +8,19 @@ var start = function(){
   document.getElementById("start").style.display = "none";
   document.getElementById("game").style.display = "initial";
   document.getElementById("score").style.display = "block";
-  if( startPlayer == 1 )
+  if( startPlayer == 1 )  // first move randomly by the agent
      moveAgent((parseInt(Math.random()*10)%9+1)+"2");  // Math.random()*10)%9 = number 0-8  -   +1 = because index in the game are 1-9
+}
+
+var newGame = function(){
+  matrix = [ null, null, null, null, null, null, null, null, null, null]
+  for(var i=1; i<10;i++){
+    document.getElementById(i+"0").style.display = "initial";
+    document.getElementById(i+"1").style.display = "none";
+    document.getElementById(i+"2").style.display = "none";
+  }
+  start();
+
 }
 
 
@@ -20,6 +31,7 @@ var clickedButton = function ( id ){
     matrix[parseInt(id/10)] = 0;
     if( checkWinner() == true ){
       alert("You win")
+      newGame();
     }
   }
 
@@ -43,11 +55,9 @@ var checkWinner = function (){
     temp = true
     temp = temp && (matrix[i] != null) && (matrix[i+3] != null) && (matrix[i+6] != null);
     temp = temp && (matrix[i] == matrix[i+3]) && (matrix[i+3] == matrix[i+6]);
-
     if( temp == true )
       return true;
   }
-
   for(var i=1; i<8; i=i+3){ // check horizontal
     temp = true
     temp = temp && (matrix[i] != null) && (matrix[i+1] != null) && (matrix[i+2] != null);
