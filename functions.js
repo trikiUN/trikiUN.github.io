@@ -74,6 +74,11 @@ var nextMove = function(){
       return;
     }
   }
+  temp = checkFirstCorner();
+  if( temp != null ){
+    moveAgent(temp+"2");
+    return;
+  }
   temp = moveInCorners();
   if(temp != null){
     moveAgent(temp+"2");
@@ -90,6 +95,33 @@ var checkWinnerMove = function(player){
       check = checkWinner();
       matrix[i] = null;
       if( check == true ) return i;
+    }
+  }
+  return null;
+}
+
+var checkFirstCorner = function(){
+
+  var elements = [];
+  for(var i=1; i<10;i++){ // Add current moves
+    if( matrix[i] != null ) elements.push(i);
+  }
+  var corners = [1,3,7,9];
+  var oppositeCorners = [9,7,3,1];
+  var temp = -1;
+  if( elements.length == 3 ){
+    temp = elements.indexOf(5);
+    if( temp > -1 && matrix[elements[temp]] == 1){ // If the agent has already been moved in the center
+      for(var i=0; i<corners.length; i++){  // Check every corner
+        temp = elements.indexOf(corners[i]);
+        if( temp > -1 ){    // check if there is a move in the corners
+          temp = elements.indexOf(oppositeCorners[i]);
+            if( temp > -1 ){  // If there are moves in one corner, check if there's a move in the opposite corner
+              var even = [2,4,6,8];
+              return even[parseInt(Math.random()*10)%4]; // return even number randomly from 2 to 8
+            }
+        }
+      }
     }
   }
   return null;
@@ -158,7 +190,7 @@ var showWinner = function(player){
   if( player == "Agent" ){
     agent++;
     temp = agent;
-    alert("You lost")
+    alert("You Lose")
   }else{
     you++;
     temp = you;
@@ -168,8 +200,3 @@ var showWinner = function(player){
   return;
 
 }
-
-
-
-
-var playMachine = function(  ) {}
