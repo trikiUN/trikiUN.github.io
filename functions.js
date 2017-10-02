@@ -102,8 +102,9 @@ var checkWinnerMove = function(player){
   return null;
 }
 
-var checkFirstCorner = function(){
 
+
+var checkFirstCorner = function(){
   var elements = [];
   for(var i=1; i<10;i++){ // Add current moves
     if( matrix[i] != null ) elements.push(i);
@@ -126,9 +127,24 @@ var checkFirstCorner = function(){
                   break;
                 }
             }
-            temp = parseInt(Math.random()*10)%even.length;            
+            temp = parseInt(Math.random()*10)%even.length;
             return even[temp]; // return even number randomly from 2 to 8
         }
+      }
+      temp = elements.indexOf(2);
+      if(temp > -1 && matrix[2] == 0){
+        temp = elements.indexOf(4);
+        if(temp > -1 && matrix[4] == 0) return 1;
+        temp = elements.indexOf(6);
+        if(temp > -1 && matrix[6] == 0) return 3;
+      }
+
+      temp = elements.indexOf(8);
+      if(temp > -1 && matrix[8] == 0){
+        temp = elements.indexOf(4);
+        if(temp > -1 && matrix[4] == 0) return 7;
+        temp = elements.indexOf(6);
+        if(temp > -1 && matrix[6] == 0) return 9;
       }
     }
   }
