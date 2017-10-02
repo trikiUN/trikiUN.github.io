@@ -1,5 +1,7 @@
 var matrix = [ null, null, null, null, null, null, null, null, null, null] // index 0 is not used
 
+
+
 var turnCounter = 0;
 var startPlayer = 0;
 var you = 0;
@@ -114,12 +116,11 @@ var checkFirstCorner = function(){
     if( temp > -1 && matrix[elements[temp]] == 1){ // If the agent has already been moved in the center
       for(var i=0; i<corners.length; i++){  // Check every corner
         temp = elements.indexOf(corners[i]);
-        if( temp > -1 ){    // check if there is a move in the corners
-          temp = elements.indexOf(oppositeCorners[i]);
-            if( temp > -1 ){  // If there are moves in one corner, check if there's a move in the opposite corner
-              var even = [2,4,6,8];
-              return even[parseInt(Math.random()*10)%4]; // return even number randomly from 2 to 8
-            }
+        if( temp > -1 && matrix[elements[temp]] == 0){ // check if there is a move in the corners
+            var even = [2,4,6,8];
+            temp = parseInt(Math.random()*10)%4;
+            while( matrix.indexOf(temp) > -1 ) temp = parseInt(Math.random()*10)%4;
+            return even[temp]; // return even number randomly from 2 to 8
         }
       }
     }
