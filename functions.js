@@ -118,8 +118,15 @@ var checkFirstCorner = function(){
         temp = elements.indexOf(corners[i]);
         if( temp > -1 && matrix[elements[temp]] == 0){ // check if there is a move in the corners
             var even = [2,4,6,8];
-            temp = parseInt(Math.random()*10)%4;
-            while( matrix.indexOf(temp) > -1 ) temp = parseInt(Math.random()*10)%4;
+            for(var k=0; k<even.length; k++){
+                temp = elements.indexOf(even[k]);
+                if( temp > -1 ){
+                  if(even[k] == 2 || even[k] == 8) even = [4,6];
+                  else even = [2,8];
+                  break;
+                }
+            }
+            temp = parseInt(Math.random()*10)%even.length;            
             return even[temp]; // return even number randomly from 2 to 8
         }
       }
