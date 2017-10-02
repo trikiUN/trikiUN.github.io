@@ -74,11 +74,6 @@ var nextMove = function(){
       return;
     }
   }
-  temp = checkFirstCorner();
-  if( temp != null ){
-    moveAgent(temp+"2");
-    return;
-  }
   temp = moveInCorners();
   if(temp != null){
     moveAgent(temp+"2");
@@ -95,23 +90,6 @@ var checkWinnerMove = function(player){
       check = checkWinner();
       matrix[i] = null;
       if( check == true ) return i;
-    }
-  }
-  return null;
-}
-
-var checkFirstCorner = function(){
-  var count = 0;
-  for(var i=1; i<10;i++){
-    if( matrix[i] != null ) count++;
-  }
-  var corners = [1,3,7,9]
-  if( count == 1 ){
-    for(var i=0; i<corners.length; i++){
-      if( matrix[corners[i]] != null ){        
-        corners = corners.reverse(); // At reversing of the corners, we get the move that the agent should do (opposite corner)
-        return corners[i];
-      }
     }
   }
   return null;
